@@ -17,11 +17,12 @@ def _():
     import numpy as np
     import altair as alt
     import openpyxl
-    
-    tsca_file = mo.notebook_location() /"public" /"tsca_categorisation_071124_wmappingdict.xlsx"
-    opera_file = mo.notebook_location() /"public" /"opera_df_tox.csv"
+    from pathlib import Path
+    TOP = mo.notebook_location().as_posix()
+    tsca_file = Path(TOP) /"public" /"tsca_categorisation_071124_wmappingdict.xlsx"
+    opera_file = Path(TOP) /"public" /"opera_df_tox.csv"
 
-    return alt, mo, np, pd, tsca_file, opera_file
+    return alt, mo, np, pd, TOP, tsca_file, opera_file
 
 
 
@@ -30,7 +31,7 @@ def _():
 
 @app.cell
 def _(pd, tsca_file):
-    df = (pd.read_excel(str(tsca_file), index_col=[0]))
+    df = (pd.read_excel(tsca_file, index_col=[0]))
     return (df,)
 
 
