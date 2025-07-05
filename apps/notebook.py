@@ -21,10 +21,10 @@ def _():
     from pathlib import Path
     
     tsca_file = mo.notebook_location() /"public" /"tsca_categorisation_071124_wmappingdict.xlsx"
-    opera_file = notebook_location() /"public" /"opera_df_tox.csv")
+    opera_file = mo.notebook_location() /"public" /"opera_df_tox.csv"
 
 
-    return alt, mo, np, pd, tsca_file, opera_file
+    return alt, mo, np, pd, pl, tsca_file, opera_file
 
 
 
