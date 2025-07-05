@@ -17,38 +17,20 @@ def _():
     import numpy as np
     import altair as alt
     import openpyxl
-    from pathlib import Path
+    
+    tsca_file = mo.notebook_location() /"public" /"tsca_categorisation_071124_wmappingdict.xlsx"
+    opera_file = mo.notebook_location() /"public" /"opera_df_tox.csv"
 
-    return Path, alt, mo, np, pd
-
-
-@app.cell
-def _():
-    from rdkit import Chem
-    from rdkit.Chem.Draw import IPythonConsole
-    from rdkit.Chem import Draw
-    from rdkit.Chem import Draw
-    from rdkit.Chem import rdFMCS
-    Draw.SetComicMode(IPythonConsole.drawOptions)
-
-    return
+    return alt, mo, np, pd, tsca_file, opera_file
 
 
-@app.cell
-def _(Path):
 
-    TOP = Path.cwd().as_posix().replace('notebooks','')
-    raw_dir = Path(TOP) / 'data' /'raw'
-    processed_dir =  Path(TOP) / 'data' /'processed'
-    interim_dir = Path(TOP) / 'data' /'interim'
-    external_dir = Path(TOP) / 'data' /'external'
-    figures_dir = Path(TOP) / 'reports' /'figures'
-    return interim_dir, raw_dir
+
 
 
 @app.cell
 def _(pd, raw_dir):
-    df = (pd.read_excel(raw_dir/'tsca_categorisation_071124_wmappingdict.xlsx', index_col=[0]))
+    df = (pd.read_excel(str(tsca_file), index_col=[0]))
     return (df,)
 
 
@@ -85,7 +67,7 @@ def _(alt, df, mo):
 
 @app.cell
 def _(interim_dir, pd):
-    opera_df = pd.read_csv(interim_dir/'opera_df_tox.csv', index_col=[0])
+    opera_df = pd.read_csv(str(opera_file), index_col=[0])
 
     return (opera_df,)
 
