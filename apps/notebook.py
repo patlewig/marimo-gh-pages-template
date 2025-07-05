@@ -21,7 +21,8 @@ def _():
     from pathlib import Path
     
     tsca_file = mo.notebook_location() /"public" /"tsca_categorisation_071124_wmappingdict.xlsx"
-    opera_file = mo.notebook_location() /"public" /"opera_df_tox.csv"
+    opera_file = mo.download("public/opera_df_tox.csv")
+
 
     return alt, mo, np, pd, tsca_file, opera_file
 
@@ -63,7 +64,7 @@ def _(alt, df, mo):
 
 @app.cell
 def _(pd, opera_file):
-    opera_df = pd.read_csv(opera_file,index_col=[0],dtype_backend='pyarrow',engine='pyarrow')
+    opera_df = pd.read_csv(opera_file,index_col=0)
 
     return (opera_df,)
 
