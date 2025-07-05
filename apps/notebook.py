@@ -133,6 +133,10 @@ def _(np, pd, selected_labels, summaries):
     df_plot = pd.DataFrame(plot_data)
     return (df_plot,)
 
+@app.cell
+def _(df_plot):
+    df_plot.head()
+    return
 
 
 @app.cell
@@ -144,8 +148,8 @@ def _(mo):
 @app.cell
 def _(alt, df_plot, mo):
     ecdf_selected = mo.ui.altair_chart(alt.Chart(df_plot).mark_point().encode(x = alt.X('log10x:Q', title='CATMoS_log10pred(LD50)'), y = alt.Y('ecdfy:Q', title='ECDF'), color=alt.Color('label:N', title='Category-Subcategory'), tooltip=['label:N', 'log10x:Q', 'ecdfy:Q']).configure_legend(orient='right'))
-    
-    return ecdf_selected
+    ecdf_selected
+    return 
 
 
 @app.cell
