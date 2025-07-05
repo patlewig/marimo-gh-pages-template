@@ -21,7 +21,7 @@ def _():
     from pathlib import Path
     
     tsca_file = mo.notebook_location() /"public" /"tsca_categorisation_071124_wmappingdict.xlsx"
-    opera_file = mo.download("public/opera_df_tox.csv")
+    opera_file = notebook_location() /"public" /"opera_df_tox.csv")
 
 
     return alt, mo, np, pd, tsca_file, opera_file
@@ -63,8 +63,8 @@ def _(alt, df, mo):
 
 
 @app.cell
-def _(pd, opera_file):
-    opera_df = pd.read_csv(opera_file,index_col=0)
+def _(pl, opera_file):
+    opera_df = pl.read_csv(opera_file)
 
     return (opera_df,)
 
@@ -73,7 +73,7 @@ def _(pd, opera_file):
 def _(opera_df):
     catmos = {}
     for i, group in opera_df.groupby('group_str'):
-        catmos[i] = group['CATMoS_LD50_pred'].values
+        catmos[i[0]] = group['CATMoS_LD50_pred'].values
     return (catmos,)
 
 
