@@ -46,10 +46,10 @@ def _(df, mo):
 
 @app.cell
 def _(alt, df, mo):
-    alt.theme.enable('googlecharts')
+    #alt.theme.enable('googlecharts')
     physical_form = mo.ui.altair_chart(alt.Chart(df.physical_form.value_counts().reset_index()).mark_bar().encode(x = 'physical_form:N', y = 'count:Q'))
-    physical_form
-    return
+    
+    return physical_form
 
 
 @app.cell
@@ -62,12 +62,12 @@ def _():
 def _(alt, df, mo):
     cats_counts = mo.ui.altair_chart(alt.Chart(df.groupby('group').size().reset_index().rename(columns = {0: 'Frequency_Count'}).sort_values(by = ['Frequency_Count'], ascending=False)).mark_bar().encode(alt.X('Frequency_Count:Q').title('Frequency Count'), alt.Y('group:N', sort='-x').title('Group')))
     cats_counts
-    return
+    return cats_counts
 
 
 @app.cell
 def _(interim_dir, pd):
-    opera_df = pd.read_csv(str(opera_file), index_col=[0])
+    opera_df = (pd.read_csv(str(opera_file), index_col=[0]))
 
     return (opera_df,)
 
@@ -137,11 +137,6 @@ def _(np, pd, selected_labels, summaries):
     return (df_plot,)
 
 
-@app.cell
-def _(df_plot):
-    df_plot.head()
-    return
-
 
 @app.cell
 def _(mo):
@@ -152,8 +147,8 @@ def _(mo):
 @app.cell
 def _(alt, df_plot, mo):
     ecdf_selected = mo.ui.altair_chart(alt.Chart(df_plot).mark_point().encode(x = alt.X('log10x:Q', title='CATMoS_log10pred(LD50)'), y = alt.Y('ecdfy:Q', title='ECDF'), color=alt.Color('label:N', title='Category-Subcategory'), tooltip=['label:N', 'log10x:Q', 'ecdfy:Q']).configure_legend(orient='right'))
-    ecdf_selected
-    return
+    
+    return ecdf_selected
 
 
 @app.cell
