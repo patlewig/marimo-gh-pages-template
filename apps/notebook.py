@@ -63,7 +63,7 @@ def _(alt, df, mo):
 
 @app.cell
 def _(pd, opera_file):
-    opera_df = pl.read_csv(opera_file,index_col=[0],dtype_backend='pyarrow',engine='pyarrow')
+    opera_df = pd.read_csv(opera_file,index_col=[0],dtype_backend='pyarrow',engine='pyarrow')
 
     return (opera_df,)
 
