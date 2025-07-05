@@ -72,7 +72,7 @@ def _(pl, opera_file):
 @app.cell
 def _(opera_df):
     catmos = {}
-    for i, group in opera_df.groupby('group_str'):
+    for i, group in opera_df.group_by('group_str'):
         catmos[i[0]] = group['CATMoS_LD50_pred'].values
     return (catmos,)
 
