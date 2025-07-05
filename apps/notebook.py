@@ -46,27 +46,21 @@ def _(df, mo):
 
 @app.cell
 def _(alt, df, mo):
-    #alt.theme.enable('googlecharts')
     physical_form = mo.ui.altair_chart(alt.Chart(df.physical_form.value_counts().reset_index()).mark_bar().encode(x = 'physical_form:N', y = 'count:Q'))
     
-    return physical_form
+    return (physical_form,)
 
-
-@app.cell
-def _():
-    #alt.Chart(df.groupby('group').size().reset_index().rename(columns = {0: 'Frequency_Count'}).sort_values(by = #['Frequency_Count'], ascending=False)).mark_bar().encode(alt.Y('group:N',sort='-x'), alt.X('Frequency_Count'))
-    return
 
 
 @app.cell
 def _(alt, df, mo):
     cats_counts = mo.ui.altair_chart(alt.Chart(df.groupby('group').size().reset_index().rename(columns = {0: 'Frequency_Count'}).sort_values(by = ['Frequency_Count'], ascending=False)).mark_bar().encode(alt.X('Frequency_Count:Q').title('Frequency Count'), alt.Y('group:N', sort='-x').title('Group')))
     cats_counts
-    return cats_counts
+    return (cats_counts,)
 
 
 @app.cell
-def _(interim_dir, pd):
+def _(opera_file, pd):
     opera_df = (pd.read_csv(str(opera_file), index_col=[0]))
 
     return (opera_df,)
