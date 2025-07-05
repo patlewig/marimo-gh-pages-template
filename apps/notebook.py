@@ -17,6 +17,7 @@ def _():
     import numpy as np
     import altair as alt
     import openpyxl
+    import polars as pl
     from pathlib import Path
     
     tsca_file = mo.notebook_location() /"public" /"tsca_categorisation_071124_wmappingdict.xlsx"
@@ -61,8 +62,8 @@ def _(alt, df, mo):
 
 
 @app.cell
-def _(pd, opera_file):
-    opera_df = pd.read_csv(str(opera_file), index_col=[0])
+def _(pl, opera_file):
+    opera_df = pl.read_csv(str(opera_file), index_col=[0])
 
     return (opera_df,)
 
