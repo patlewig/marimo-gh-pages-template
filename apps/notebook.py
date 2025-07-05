@@ -29,7 +29,7 @@ def _():
 
 
 @app.cell
-def _(pd, raw_dir):
+def _(pd, tsca_file):
     df = (pd.read_excel(str(tsca_file), index_col=[0]))
     return (df,)
 
@@ -60,8 +60,8 @@ def _(alt, df, mo):
 
 
 @app.cell
-def _(opera_file, pd):
-    opera_df = (pd.read_csv(str(opera_file), index_col=[0]))
+def _(pd, opera_file):
+    opera_df = pd.read_csv(opera_file, index_col=[0])
 
     return (opera_df,)
 
